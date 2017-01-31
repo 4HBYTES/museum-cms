@@ -7,6 +7,8 @@ class ArticleAdmin(admin.ModelAdmin):
 
     list_display = ('name', 'created_at',)
 
+    search_fields = ['name']
+
 
 admin.site.register(Article, ArticleAdmin)
 
@@ -15,6 +17,8 @@ class EventAdmin(admin.ModelAdmin):
     readonly_fields = ('id',)
 
     list_display = ('name', 'place', 'date',)
+
+    search_fields = ['name']
 
 
 admin.site.register(Event, EventAdmin)

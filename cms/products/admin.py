@@ -7,5 +7,7 @@ class ProductAdmin(admin.ModelAdmin):
 
     list_display = ('name', 'price', 'currency',)
 
+    search_fields = ['name']
+
 
 admin.site.register(Product, ProductAdmin)

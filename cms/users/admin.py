@@ -7,6 +7,8 @@ class FrontUserAdmin(admin.ModelAdmin):
 
     list_display = ('email', 'first_name', 'last_name',)
 
+    search_fields = ['first_name', 'last_name']
+
     def has_add_permission(self, request):
         return False
 
