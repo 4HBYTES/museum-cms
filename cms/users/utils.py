@@ -30,6 +30,6 @@ def basicauth(view):
                 request.user = user
                 return view(request, *args, **kwargs)
 
-    return HttpResponse(status=401)   
+    return HttpResponse(status=401)
 
   return view_or_basicauth

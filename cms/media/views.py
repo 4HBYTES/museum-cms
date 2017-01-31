@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from .models import Article, Event
 import json
 
+
 def get_news(request):
     all_articles = []
     articles = Article.objects.all()

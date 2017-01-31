@@ -58,7 +58,11 @@ def signup(request):
 
     if user is not None:
         json_data = json.dumps({'error': 'Email already exists'})
-        return HttpResponse(json_data, status=409, content_type='application/json')
+        return HttpResponse(
+            json_data,
+            status=409,
+            content_type='application/json'
+        )
 
     hashed_password = bcrypt.hashpw(raw_password, bcrypt.gensalt())
 

@@ -2,8 +2,10 @@ from __future__ import unicode_literals
 from django.db import models
 import uuid
 
+
 def make_uuid():
     return uuid.uuid4()
+
 
 class Product(models.Model):
     id = models.UUIDField(primary_key=True, default=make_uuid)

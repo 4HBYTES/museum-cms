@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from .models import Product
 import json
 
+
 def get_all(request):
     all_products = []
     products = Product.objects.all()
@@ -11,12 +12,18 @@ def get_all(request):
     json_products = json.dumps(all_products)
     return HttpResponse(json_products, content_type='application/json')
 
+
 def get_one(request, product_id):
     product = None
     try:
         product = Product.objects.get(id=product_id)
     except Product.DoesNotExist:
-        return HttpResponse({'error': 'does not exists'}, status=404, content_type='application/json')
+        json_error = json.dumps({'error': 'does not exists'})
+        return HttpResponse(
+            json_error,
+            status=404,
+            content_type='application/json'
+        )
 
     json_product = json.dumps(product.to_view())
     return HttpResponse(json_product, content_type='application/json')

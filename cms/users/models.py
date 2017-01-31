@@ -3,8 +3,10 @@ import uuid
 
 from django.db import models
 
+
 def make_uuid():
     return uuid.uuid4()
+
 
 class FrontUser(models.Model):
     id = models.UUIDField(primary_key=True, default=make_uuid)
