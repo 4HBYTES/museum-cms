@@ -12,9 +12,6 @@ class Product(models.Model):
     price = models.FloatField()
     currency = models.CharField(max_length=3, default='USD')
 
-    def __str__(self):
-        return '{} : {}{}'.format(self.name, self.price, self.currency)
-
     def to_view(self):
         return {
             'name': self.name,
