@@ -52,7 +52,7 @@ This is a dummy CMS for a proof of concept, it is definitely not production read
 
 `curl http://127.0.0.1:8000/users/profile -H 'AUTHORIZATION: Basic dG90b0B0ZXN0LmNvbToxMjM0NTY=' -v`
 
- * 200 {email,first_name,last_name} OK
+ * 200 {id,email,first_name,last_name} OK
 
 ### Password
 
