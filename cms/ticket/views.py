@@ -26,7 +26,7 @@ def create(request):
             content_type='application/json'
         )
 
-    quantity = data['quantity']
+    quantity = int(data['quantity'])
     product_id = data['product_id']
     user_id = data['user_id']
 
