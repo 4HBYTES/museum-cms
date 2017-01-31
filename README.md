@@ -90,11 +90,13 @@ This is a dummy CMS for a proof of concept, it is definitely not production read
 `curl http://127.0.0.1:8000/ticket/create --data '{"token": "3d008cb7-15ce-4e30-b5d1-b626064797fc", "quantity": 1, "product_id": "3e855fad-dd92-4545-96e1-40fb5dfd8eab", "user_id": "78112ad2-cf3c-4b82-9200-7debaf4a7740"}' -v`
 
  * 201 {} OK
+ * 400 {} Token invalid
 
 ### Use a ticket
 
 `curl http://127.0.0.1:8000/ticket/use --data '{"token": "3d008cb7-15ce-4e30-b5d1-b626064797fc", "ticket_id": "b9797f1d-24e0-432f-8fa7-81aead71a985"}' -v`
 
  * 200 {} OK
+ * 400 {} Token invalid
  * 404 {} cannot find the ticket
  * 409 {} ticket already used
