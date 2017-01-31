@@ -7,7 +7,7 @@ class TicketAdmin(admin.ModelAdmin):
 
     list_display = ('created_at', 'product', 'user', 'used')
 
-    search_fields = ['user']
+    search_fields = ['user__first_name', 'user__last_name']
 
 
 admin.site.register(Ticket, TicketAdmin)
