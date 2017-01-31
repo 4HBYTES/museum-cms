@@ -72,3 +72,15 @@ This is a dummy CMS for a proof of concept, it is definitely not production read
 
  * 200 {id,name,description,price,currency} OK
  * 404 Not found
+
+### All news (no pagination)
+
+`curl http://127.0.0.1:8000/media/news -v`
+
+ * 200 [{id, created_at, name, description}] OK
+
+### All events (no pagination)
+
+`curl http://127.0.0.1:8000/media/events -v`
+
+ * 200 [{id, place, date, name, description}] OK

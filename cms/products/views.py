@@ -1,8 +1,6 @@
-from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from .models import Product
 import json
-import uuid
 
 def get_all(request):
     all_products = []
