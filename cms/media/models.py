@@ -14,6 +14,12 @@ class Article(models.Model):
     description = models.TextField()
     created_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        '''
+        This is used by the 'Recent actions' widget in the admin.
+        '''
+        return '[Article] {}'.format(self.name)
+
     def to_view(self):
         return {
             'name': self.name,
@@ -34,8 +40,14 @@ class Event(models.Model):
     id = models.UUIDField(primary_key=True, default=make_uuid)
     name = models.CharField(max_length=30)
     description = models.TextField()
-    place = models.CharField(choices=MUSEUM_CHOICES, max_length=100)
+    place = models.CharField(choices=MUSEUM_CHOICES, default='PH', max_length=100)
     date = models.DateTimeField()
+
+    def __str__(self):
+        '''
+        This is used by the 'Recent actions' widget in the admin.
+        '''
+        return '[Event] {}'.format(self.name)
 
     def to_view(self):
         return {

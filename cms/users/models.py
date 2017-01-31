@@ -13,6 +13,12 @@ class FrontUser(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
 
+    def __str__(self):
+        '''
+        This is used by the 'Recent actions' widget in the admin.
+        '''
+        return '[User] {} {}'.format(self.first_name, self.last_name)
+
     def to_view(self):
         return {
             'email': self.email,

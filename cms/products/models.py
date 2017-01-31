@@ -12,6 +12,16 @@ class Product(models.Model):
     price = models.FloatField()
     currency = models.CharField(max_length=3, default='USD')
 
+    def __str__(self):
+        '''
+        This is used by the 'Recent actions' widget in the admin.
+        '''
+        return '[Product] {} : {}{}'.format(
+            self.name,
+            self.price,
+            self.currency
+        )
+
     def to_view(self):
         return {
             'name': self.name,
