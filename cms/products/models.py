@@ -18,7 +18,7 @@ class Product(models.Model):
         '''
         This is used by the 'Recent actions' widget in the admin.
         '''
-        return '[Product] {} : {}{}'.format(
+        return '{} : {}{}'.format(
             self.name,
             self.price,
             self.currency

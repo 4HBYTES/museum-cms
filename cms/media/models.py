@@ -19,7 +19,7 @@ class Article(models.Model):
         '''
         This is used by the 'Recent actions' widget in the admin.
         '''
-        return '[Article] {}'.format(self.name)
+        return '{}'.format(self.name)
 
     def to_view(self):
         return {
@@ -51,7 +51,7 @@ class Event(models.Model):
         '''
         This is used by the 'Recent actions' widget in the admin.
         '''
-        return '[Event] {}'.format(self.name)
+        return '{}'.format(self.name)
 
     def to_view(self):
         return {
