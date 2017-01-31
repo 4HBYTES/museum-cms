@@ -4,7 +4,6 @@ There are no validation, or proper error handling, and there is
 a simple basic auth to protect private resources.
 '''
 
-from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from .models import FrontUser

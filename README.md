@@ -59,3 +59,16 @@ This is a dummy CMS for a proof of concept, it is definitely not production read
 `curl http://127.0.0.1:8000/users/password -X PUT --data '{"password": "654321"}' -H 'AUTHORIZATION: Basic dG90b0B0ZXN0LmNvbToxMjM0NTY=' -`
 
  * 200 {} OK
+
+### All products
+
+`curl http://127.0.0.1:8000/products/ -v`
+
+ * 200 [{id,name,description,price,currency}] OK
+
+### All products
+
+`curl http://127.0.0.1:8000/products/8f1e4151-61f1-4275-8135-c40e795e5dd9 -v`
+
+ * 200 {id,name,description,price,currency} OK
+ * 404 Not found
