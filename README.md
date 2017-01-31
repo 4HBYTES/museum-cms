@@ -66,7 +66,7 @@ This is a dummy CMS for a proof of concept, it is definitely not production read
 
  * 200 [{id,name,description,price,currency}] OK
 
-### All products
+### One products (by its uuid)
 
 `curl http://127.0.0.1:8000/products/8f1e4151-61f1-4275-8135-c40e795e5dd9 -v`
 
