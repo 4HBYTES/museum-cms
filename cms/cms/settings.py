@@ -25,6 +25,8 @@ SECRET_KEY = 'w1z*l4+qdew)5$51@@o)hi=@9vl2p4(gont%wnw04=)aq4du%$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', True)
 
+APP_TOKEN = os.environ.get('APP_TOKEN', '3d008cb7-15ce-4e30-b5d1-b626064797fc')
+
 ALLOWED_HOSTS = []
 
 
