@@ -1,5 +1,7 @@
 # Museum CMS
 
+This is a dummy CMS for a proof of concept, it is definitely not production ready.
+
 ## How to run:
 
 ### SQL
