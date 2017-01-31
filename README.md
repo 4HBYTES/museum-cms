@@ -4,9 +4,9 @@
 
 ### SQL
 
-create user cms with password 'cms';
-create database cms;
-grant all privileges on database cms to cms;
+ * `create user cms with password 'cms';`
+ * `create database cms;`
+ * `grant all privileges on database cms to cms;`
 
 ### Python
 
