@@ -27,7 +27,7 @@ DEBUG = os.environ.get('DEBUG', True)
 
 APP_TOKEN = os.environ.get('APP_TOKEN', '3d008cb7-15ce-4e30-b5d1-b626064797fc')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
