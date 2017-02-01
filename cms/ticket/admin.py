@@ -9,5 +9,7 @@ class TicketAdmin(admin.ModelAdmin):
 
     search_fields = ['user__first_name', 'user__last_name']
 
+    ordering = ('-created_at',)
+
 
 admin.site.register(Ticket, TicketAdmin)
