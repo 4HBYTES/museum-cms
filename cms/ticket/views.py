@@ -1,6 +1,6 @@
 from django.http import HttpResponse
+from django.views.generic import View
 from django.conf import settings
-from django.views.decorators.csrf import csrf_exempt
 from .models import Ticket
 from users.models import FrontUser
 from users.utils import basicauth
@@ -9,85 +9,89 @@ import json
 from datetime import datetime
 
 
-@csrf_exempt
-def create(request):
-    '''
-    Create ticket(s)
-    '''
-    data = json.loads(request.body)
+class CreateTicket(View):
 
-    token = data['token']
-    app_token = getattr(settings, 'APP_TOKEN', None)
+    def post(self, request):
+        '''
+        Create ticket(s)
+        '''
+        data = json.loads(request.body)
 
-    if token != app_token:
-        json_data = json.dumps({'error': 'invalid token'})
-        return HttpResponse(
-            json_data,
-            status=400,
-            content_type='application/json'
-        )
+        token = data['token']
+        app_token = getattr(settings, 'APP_TOKEN', None)
 
-    user_id = data['user_id']
-    for item in data['products']:
-        quantity = int(item['quantity'])
-        product_id = item['product_id']
-
-        for i in range(quantity):
-            # TODO: This is where we can do: QR code, email sending, etc
-            ticket = Ticket(
-                created_at=datetime.now(),
-                product=Product.objects.get(id=product_id),
-                user=FrontUser.objects.get(id=user_id),
-                used=False
+        if token != app_token:
+            json_data = json.dumps({'error': 'invalid token'})
+            return HttpResponse(
+                json_data,
+                status=400,
+                content_type='application/json'
             )
-            ticket.save()
 
-    return HttpResponse({}, status=201, content_type='application/json')
+        user_id = data['user_id']
+        for item in data['products']:
+            quantity = int(item['quantity'])
+            product_id = item['product_id']
 
+            for i in range(quantity):
+                # TODO: This is where we can do: QR code, email sending, etc
+                ticket = Ticket(
+                    created_at=datetime.now(),
+                    product=Product.objects.get(id=product_id),
+                    user=FrontUser.objects.get(id=user_id),
+                    used=False
+                )
+                ticket.save()
 
-@csrf_exempt
-def use(request):
-    '''
-    Use a ticket
-    '''
-    data = json.loads(request.body)
-
-    token = data['token']
-    app_token = getattr(settings, 'APP_TOKEN', None)
-
-    if token != app_token:
-        json_data = json.dumps({'error': 'invalid token'})
-        return HttpResponse(
-            json_data,
-            status=400,
-            content_type='application/json'
-        )
-
-    ticket_id = data['ticket_id']
-
-    ticket = None
-    try:
-        ticket = Ticket.objects.get(id=ticket_id)
-    except Ticket.DoesNotExist:
-        return HttpResponse({}, status=404, content_type='application/json')
-
-    if ticket.used:
-        return HttpResponse({}, status=409, content_type='application/json')
-
-    ticket.used = True
-    ticket.save()
-
-    return HttpResponse({}, status=200, content_type='application/json')
+        return HttpResponse({}, status=201, content_type='application/json')
 
 
-@basicauth
-def get_user_tickets(request):
-    user_id = request.user.id
+class UseTicket(View):
 
-    all_tickets = []
-    tickets = Ticket.objects.filter(user__id=user_id).filter(used=False)
-    for ticket in tickets:
-        all_tickets.append(ticket.to_view())
+    def post(self, request):
+        '''
+        Use a ticket
+        '''
+        data = json.loads(request.body)
 
-    json_tickets = json.dumps(all_tickets)
-    return HttpResponse(json_tickets, content_type='application/json')
+        token = data['token']
+        app_token = getattr(settings, 'APP_TOKEN', None)
+
+        if token != app_token:
+            json_data = json.dumps({'error': 'invalid token'})
+            return HttpResponse(
+                json_data,
+                status=400,
+                content_type='application/json'
+            )
+
+        ticket_id = data['ticket_id']
+
+        ticket = None
+        try:
+            ticket = Ticket.objects.get(id=ticket_id)
+        except Ticket.DoesNotExist:
+            return HttpResponse({}, status=404, content_type='application/json')
+
+        if ticket.used:
+            return HttpResponse({}, status=409, content_type='application/json')
+
+        ticket.used = True
+        ticket.save()
+
+        return HttpResponse({}, status=200, content_type='application/json')
+
+
+class GetTicket(View):
+
+    @basicauth
+    def get(self, request):
+        user_id = request.user.id
+
+        all_tickets = []
+        tickets = Ticket.objects.filter(user__id=user_id).filter(used=False)
+        for ticket in tickets:
+            all_tickets.append(ticket.to_view())
+
+        json_tickets = json.dumps(all_tickets)
+        return HttpResponse(json_tickets, content_type='application/json')
