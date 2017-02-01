@@ -26,19 +26,20 @@ def create(request):
             content_type='application/json'
         )
 
-    quantity = int(data['quantity'])
-    product_id = data['product_id']
     user_id = data['user_id']
+    for item in data['products']:
+        quantity = int(item['quantity'])
+        product_id = item['product_id']
 
-    for i in range(quantity):
-        # TODO: This is where we can do: QR code, email sending, etc
-        ticket = Ticket(
-            created_at=datetime.now(),
-            product=Product.objects.get(id=product_id),
-            user=FrontUser.objects.get(id=user_id),
-            used=False
-        )
-        ticket.save()
+        for i in range(quantity):
+            # TODO: This is where we can do: QR code, email sending, etc
+            ticket = Ticket(
+                created_at=datetime.now(),
+                product=Product.objects.get(id=product_id),
+                user=FrontUser.objects.get(id=user_id),
+                used=False
+            )
+            ticket.save()
 
     return HttpResponse({}, status=201, content_type='application/json')
 

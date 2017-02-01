@@ -87,7 +87,7 @@ This is a dummy CMS for a proof of concept, it is definitely not production read
 
 ### Create ticket(s)
 
-`curl http://127.0.0.1:8000/ticket/create --data '{"token": "3d008cb7-15ce-4e30-b5d1-b626064797fc", "quantity": 1, "product_id": "3e855fad-dd92-4545-96e1-40fb5dfd8eab", "user_id": "78112ad2-cf3c-4b82-9200-7debaf4a7740"}' -v`
+`curl http://127.0.0.1:8000/ticket/create --data '{"token": "3d008cb7-15ce-4e30-b5d1-b626064797fc", "user_id": "78112ad2-cf3c-4b82-9200-7debaf4a7740", "products": [{"quantity": 1, "product_id": "3e855fad-dd92-4545-96e1-40fb5dfd8eab"}, {"quantity": 4, "product_id": "8f1e4151-61f1-4275-8135-c40e795e5dd9"}]}' -v`
 
  * 201 {} OK
  * 400 {} Token invalid
