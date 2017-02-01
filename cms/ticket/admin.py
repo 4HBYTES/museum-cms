@@ -11,5 +11,8 @@ class TicketAdmin(admin.ModelAdmin):
 
     ordering = ('-created_at',)
 
+    def has_add_permission(self, request):
+        return False
+
 
 admin.site.register(Ticket, TicketAdmin)
