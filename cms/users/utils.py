@@ -10,7 +10,7 @@ import bcrypt
 
 def basicauth(view):
   @wraps(view)
-  def view_or_basicauth(request, *args, **kwargs):
+  def view_or_basicauth(s, request, *args, **kwargs):
     if 'HTTP_AUTHORIZATION' in request.META:
         auth = request.META['HTTP_AUTHORIZATION'].split()
         if len(auth) == 2:
@@ -28,7 +28,7 @@ def basicauth(view):
                     return HttpResponse(status=401)
 
                 request.user = user
-                return view(request, *args, **kwargs)
+                return view(s, request, *args, **kwargs)
 
     return HttpResponse(status=401)
 
