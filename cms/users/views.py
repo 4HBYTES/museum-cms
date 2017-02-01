@@ -33,7 +33,7 @@ class SigninView(View):
         result = bcrypt.hashpw(raw_password, user.password) == user.password
 
         if result:
-            return HttpResponse({}, content_type='application/json')
+            return HttpResponse(json.dumps({"user_id":user.id.__str__()}), content_type='application/json')
 
         return HttpResponse({}, status=401, content_type='application/json')
 
@@ -77,7 +77,7 @@ class SignupView(View):
 
         user.save()
 
-        return HttpResponse({}, status=201, content_type='application/json')
+        return HttpResponse(json.dumps({"user_id":user.id.__str__()}), status=201, content_type='application/json')
 
 
 class PasswordView(View):
