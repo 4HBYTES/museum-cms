@@ -100,3 +100,9 @@ This is a dummy CMS for a proof of concept, it is definitely not production read
  * 400 {} Token invalid
  * 404 {} cannot find the ticket
  * 409 {} ticket already used
+
+### Get user's UNUSED ticket(s)
+
+`curl http://127.0.0.1:8000/ticket/ -H 'AUTHORIZATION: Basic dGVzdEB0ZXN0LmNvbToxMjM0NTY=' -v`
+
+ * 200 [{id,product,created_at}]

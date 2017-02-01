@@ -21,3 +21,10 @@ class Ticket(models.Model):
         This is used by the 'Recent actions' widget in the admin.
         '''
         return '{}'.format(self.id)
+
+    def to_view(self):
+        return {
+            'id': str(self.id),
+            'product': self.product.to_view(),
+            'created_at': self.created_at.isoformat()
+        }

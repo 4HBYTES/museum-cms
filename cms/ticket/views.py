@@ -3,6 +3,7 @@ from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from .models import Ticket
 from users.models import FrontUser
+from users.utils import basicauth
 from products.models import Product
 import json
 from datetime import datetime
@@ -77,3 +78,16 @@ def use(request):
     ticket.save()
 
     return HttpResponse({}, status=200, content_type='application/json')
+
+
+@basicauth
+def get_user_tickets(request):
+    user_id = request.user.id
+
+    all_tickets = []
+    tickets = Ticket.objects.filter(user__id=user_id).filter(used=False)
+    for ticket in tickets:
+        all_tickets.append(ticket.to_view())
+
+    json_tickets = json.dumps(all_tickets)
+    return HttpResponse(json_tickets, content_type='application/json')
